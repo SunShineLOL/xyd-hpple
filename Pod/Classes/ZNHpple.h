@@ -29,11 +29,11 @@
 
 
 #import <Foundation/Foundation.h>
-#import "TFHppleElement.h"
+#import "ZNHppleElement.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TFHpple : NSObject 
+@interface ZNHpple : NSObject 
 
 - (id) initWithData:(NSData *)theData encoding:(nullable NSString *)encoding isXML:(BOOL)isDataXML;
 - (id) initWithData:(NSData *)theData isXML:(BOOL)isDataXML;
@@ -42,15 +42,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (id) initWithHTMLData:(NSData *)theData encoding:(NSString *)encoding;
 - (id) initWithHTMLData:(NSData *)theData;
 
-+ (TFHpple *) hppleWithData:(NSData *)theData encoding:(nullable NSString *)encoding isXML:(BOOL)isDataXML;
-+ (TFHpple *) hppleWithData:(NSData *)theData isXML:(BOOL)isDataXML;
-+ (TFHpple *) hppleWithXMLData:(NSData *)theData encoding:(NSString *)encoding;
-+ (TFHpple *) hppleWithXMLData:(NSData *)theData;
-+ (TFHpple *) hppleWithHTMLData:(NSData *)theData encoding:(NSString *)encoding;
-+ (TFHpple *) hppleWithHTMLData:(NSData *)theData;
++ (ZNHpple *) hppleWithData:(NSData *)theData encoding:(nullable NSString *)encoding isXML:(BOOL)isDataXML;
++ (ZNHpple *) hppleWithData:(NSData *)theData isXML:(BOOL)isDataXML;
++ (ZNHpple *) hppleWithXMLData:(NSData *)theData encoding:(NSString *)encoding;
++ (ZNHpple *) hppleWithXMLData:(NSData *)theData;
++ (ZNHpple *) hppleWithHTMLData:(NSData *)theData encoding:(NSString *)encoding;
++ (ZNHpple *) hppleWithHTMLData:(NSData *)theData;
 
-- (NSArray<TFHppleElement *> *) searchWithXPathQuery:(NSString *)xPathOrCSS;
-- (nullable TFHppleElement *) peekAtSearchWithXPathQuery:(NSString *)xPathOrCSS;
+- (NSArray<ZNHppleElement *> *) searchWithXPathQuery:(NSString *)xPathOrCSS;
+- (nullable ZNHppleElement *) peekAtSearchWithXPathQuery:(NSString *)xPathOrCSS;
 
 @property (nonatomic, readonly) NSData * data;
 @property (nonatomic, readonly) NSString * encoding;

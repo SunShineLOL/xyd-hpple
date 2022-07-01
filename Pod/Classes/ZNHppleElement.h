@@ -31,11 +31,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TFHppleElement : NSObject
+@interface ZNHppleElement : NSObject
 
 - (id) initWithNode:(NSDictionary *) theNode isXML:(BOOL)isDataXML withEncoding:(nullable NSString *)theEncoding;
 
-+ (TFHppleElement *) hppleElementWithNode:(NSDictionary *) theNode isXML:(BOOL)isDataXML withEncoding:(nullable NSString *)theEncoding;
++ (ZNHppleElement *) hppleElementWithNode:(NSDictionary *) theNode isXML:(BOOL)isDataXML withEncoding:(nullable NSString *)theEncoding;
 
 @property (nonatomic, copy, readonly) NSString *raw;
 // Returns this tag's innerHTML content.
@@ -53,10 +53,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSArray *children;
 
 // Returns the first child of a given node
-@property (nonatomic, strong, readonly, nullable) TFHppleElement *firstChild;
+@property (nonatomic, strong, readonly, nullable) ZNHppleElement *firstChild;
 
 // the parent of a node
-@property (nonatomic, unsafe_unretained, readonly) TFHppleElement *parent;
+@property (nonatomic, unsafe_unretained, readonly) ZNHppleElement *parent;
 
 // Returns YES if the node has any child
 // This is more efficient than using the children property since no NSArray is constructed
@@ -72,33 +72,33 @@ NS_ASSUME_NONNULL_BEGIN
 // Returns the children whose tag name equals the given string
 // (comparison is performed with NSString's isEqualToString)
 // Returns an empty array if no matching child is found
-- (NSArray<TFHppleElement *> *) childrenWithTagName:(NSString *)tagName;
+- (NSArray<ZNHppleElement *> *) childrenWithTagName:(NSString *)tagName;
 
 // Returns the first child node whose tag name equals the given string
 // (comparison is performed with NSString's isEqualToString)
 // Returns nil if no matching child is found
-- (nullable TFHppleElement *) firstChildWithTagName:(NSString *)tagName;
+- (nullable ZNHppleElement *) firstChildWithTagName:(NSString *)tagName;
 
 // Returns the children whose class equals the given string
 // (comparison is performed with NSString's isEqualToString)
 // Returns an empty array if no matching child is found
-- (NSArray<TFHppleElement *> *) childrenWithClassName:(NSString *)className;
+- (NSArray<ZNHppleElement *> *) childrenWithClassName:(NSString *)className;
 
 // Returns the first child whose class requals the given string
 // (comparison is performed with NSString's isEqualToString)
 // Returns nil if no matching child is found
-- (nullable TFHppleElement *) firstChildWithClassName:(NSString*)className;
+- (nullable ZNHppleElement *) firstChildWithClassName:(NSString*)className;
 
 // Returns the first text node from this element's children
 // Returns nil if there is no text node among the children
-- (nullable TFHppleElement *) firstTextChild;
+- (nullable ZNHppleElement *) firstTextChild;
 
 // Returns the string contained by the first text node from this element's children
 // Convenience method which can be used instead of firstTextChild.content
 - (nullable NSString *) text;
 
 // Returns elements searched with xpath
-- (NSArray<TFHppleElement *> *) searchWithXPathQuery:(NSString *)xPathOrCSS;
+- (NSArray<ZNHppleElement *> *) searchWithXPathQuery:(NSString *)xPathOrCSS;
 
 // Custom keyed subscripting
 - (nullable id)objectForKeyedSubscript:(id)key;

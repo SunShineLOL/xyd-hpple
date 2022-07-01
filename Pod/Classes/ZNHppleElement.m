@@ -1,5 +1,5 @@
 //
-//  TFHppleElement.m
+//  ZNHppleElement.m
 //  Hpple
 //
 //  Created by Geoffrey Grosenbach on 1/31/09.
@@ -28,8 +28,8 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-#import "TFHppleElement.h"
-#import "XPathQuery.h"
+#import "ZNHppleElement.h"
+#import "ZNXPathQuery.h"
 
 static NSString * const TFHppleNodeContentKey           = @"nodeContent";
 static NSString * const TFHppleNodeNameKey              = @"nodeName";
@@ -39,19 +39,19 @@ static NSString * const TFHppleNodeAttributeNameKey     = @"attributeName";
 
 static NSString * const TFHppleTextNodeName            = @"text";
 
-@interface TFHppleElement ()
+@interface ZNHppleElement ()
 {    
     NSDictionary * node;
     BOOL isXML;
     NSString *encoding;
-    __unsafe_unretained TFHppleElement *parent;
+    __unsafe_unretained ZNHppleElement *parent;
 }
 
-@property (nonatomic, unsafe_unretained, readwrite) TFHppleElement *parent;
+@property (nonatomic, unsafe_unretained, readwrite) ZNHppleElement *parent;
 
 @end
 
-@implementation TFHppleElement
+@implementation ZNHppleElement
 @synthesize parent;
 
 
@@ -67,7 +67,7 @@ static NSString * const TFHppleTextNodeName            = @"text";
   return self;
 }
 
-+ (TFHppleElement *) hppleElementWithNode:(NSDictionary *) theNode isXML:(BOOL)isDataXML withEncoding:(NSString *)theEncoding
++ (ZNHppleElement *) hppleElementWithNode:(NSDictionary *) theNode isXML:(BOOL)isDataXML withEncoding:(NSString *)theEncoding
 {
   return [[[self class] alloc] initWithNode:theNode isXML:isDataXML withEncoding:theEncoding];
 }
@@ -94,14 +94,14 @@ static NSString * const TFHppleTextNodeName            = @"text";
 {
   NSMutableArray *children = [NSMutableArray array];
   for (NSDictionary *child in [node objectForKey:TFHppleNodeChildrenKey]) {
-      TFHppleElement *element = [TFHppleElement hppleElementWithNode:child isXML:isXML withEncoding:encoding];
+      ZNHppleElement *element = [ZNHppleElement hppleElementWithNode:child isXML:isXML withEncoding:encoding];
       element.parent = self;
       [children addObject:element];
   }
   return children;
 }
 
-- (TFHppleElement *) firstChild
+- (ZNHppleElement *) firstChild
 {
   NSArray * children = self.children;
   if (children.count)
@@ -154,7 +154,7 @@ static NSString * const TFHppleTextNodeName            = @"text";
 {
     NSMutableArray* matches = [NSMutableArray array];
     
-    for (TFHppleElement* child in self.children)
+    for (ZNHppleElement* child in self.children)
     {
         if ([child.tagName isEqualToString:tagName])
             [matches addObject:child];
@@ -163,9 +163,9 @@ static NSString * const TFHppleTextNodeName            = @"text";
     return matches;
 }
 
-- (TFHppleElement *) firstChildWithTagName:(NSString*)tagName
+- (ZNHppleElement *) firstChildWithTagName:(NSString*)tagName
 {
-    for (TFHppleElement* child in self.children)
+    for (ZNHppleElement* child in self.children)
     {
         if ([child.tagName isEqualToString:tagName])
             return child;
@@ -178,7 +178,7 @@ static NSString * const TFHppleTextNodeName            = @"text";
 {
     NSMutableArray* matches = [NSMutableArray array];
     
-    for (TFHppleElement* child in self.children)
+    for (ZNHppleElement* child in self.children)
     {
         if ([[child objectForKey:@"class"] isEqualToString:className])
             [matches addObject:child];
@@ -187,9 +187,9 @@ static NSString * const TFHppleTextNodeName            = @"text";
     return matches;
 }
 
-- (TFHppleElement *) firstChildWithClassName:(NSString*)className
+- (ZNHppleElement *) firstChildWithClassName:(NSString*)className
 {
-    for (TFHppleElement* child in self.children)
+    for (ZNHppleElement* child in self.children)
     {
         if ([[child objectForKey:@"class"] isEqualToString:className])
             return child;
@@ -198,9 +198,9 @@ static NSString * const TFHppleTextNodeName            = @"text";
     return nil;
 }
 
-- (TFHppleElement *) firstTextChild
+- (ZNHppleElement *) firstTextChild
 {
-    for (TFHppleElement* child in self.children)
+    for (ZNHppleElement* child in self.children)
     {
         if ([child isTextNode])
             return child;
@@ -222,20 +222,20 @@ static NSString * const TFHppleTextNodeName            = @"text";
 
     NSArray * detailNodes = nil;
     if (isXML) {
-        detailNodes = PerformXMLXPathQueryWithEncoding(data, xPathOrCSS, encoding);
+        detailNodes = ZNPerformXMLXPathQueryWithEncoding(data, xPathOrCSS, encoding);
     } else {
-        detailNodes = PerformHTMLXPathQueryWithEncoding(data, xPathOrCSS, encoding);
+        detailNodes = ZNPerformHTMLXPathQueryWithEncoding(data, xPathOrCSS, encoding);
     }
     
     NSMutableArray * hppleElements = [NSMutableArray array];
     for (id newNode in detailNodes) {
-        [hppleElements addObject:[TFHppleElement hppleElementWithNode:newNode isXML:isXML withEncoding:encoding]];
+        [hppleElements addObject:[ZNHppleElement hppleElementWithNode:newNode isXML:isXML withEncoding:encoding]];
     }
     return hppleElements;
 }
 
 // Returns first element at xPath
-- (TFHppleElement *) peekAtSearchWithXPathQuery:(NSString *)xPathOrCSS
+- (ZNHppleElement *) peekAtSearchWithXPathQuery:(NSString *)xPathOrCSS
 {
   NSArray * elements = [self searchWithXPathQuery:xPathOrCSS];
   if ([elements count] >= 1) {

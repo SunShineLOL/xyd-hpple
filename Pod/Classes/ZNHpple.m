@@ -27,10 +27,10 @@
 //  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "TFHpple.h"
-#import "XPathQuery.h"
+#import "ZNHpple.h"
+#import "ZNXPathQuery.h"
 
-@interface TFHpple ()
+@interface ZNHpple ()
 {
     NSData * data;
     NSString * encoding;
@@ -40,7 +40,7 @@
 @end
 
 
-@implementation TFHpple
+@implementation ZNHpple
 
 @synthesize data;
 @synthesize encoding;
@@ -84,27 +84,27 @@
   return [self initWithData:theData encoding:nil isXML:NO];
 }
 
-+ (TFHpple *) hppleWithData:(NSData *)theData encoding:(NSString *)theEncoding isXML:(BOOL)isDataXML {
++ (ZNHpple *) hppleWithData:(NSData *)theData encoding:(NSString *)theEncoding isXML:(BOOL)isDataXML {
   return [[[self class] alloc] initWithData:theData encoding:theEncoding isXML:isDataXML];
 }
 
-+ (TFHpple *) hppleWithData:(NSData *)theData isXML:(BOOL)isDataXML {
++ (ZNHpple *) hppleWithData:(NSData *)theData isXML:(BOOL)isDataXML {
   return [[self class] hppleWithData:theData encoding:nil isXML:isDataXML];
 }
 
-+ (TFHpple *) hppleWithHTMLData:(NSData *)theData encoding:(NSString *)theEncoding {
++ (ZNHpple *) hppleWithHTMLData:(NSData *)theData encoding:(NSString *)theEncoding {
   return [[self class] hppleWithData:theData encoding:theEncoding isXML:NO];
 }
 
-+ (TFHpple *) hppleWithHTMLData:(NSData *)theData {
++ (ZNHpple *) hppleWithHTMLData:(NSData *)theData {
   return [[self class] hppleWithData:theData encoding:nil isXML:NO];
 }
 
-+ (TFHpple *) hppleWithXMLData:(NSData *)theData encoding:(NSString *)theEncoding {
++ (ZNHpple *) hppleWithXMLData:(NSData *)theData encoding:(NSString *)theEncoding {
   return [[self class] hppleWithData:theData encoding:theEncoding isXML:YES];
 }
 
-+ (TFHpple *) hppleWithXMLData:(NSData *)theData {
++ (ZNHpple *) hppleWithXMLData:(NSData *)theData {
   return [[self class] hppleWithData:theData encoding:nil isXML:YES];
 }
 
@@ -115,20 +115,20 @@
 {
   NSArray * detailNodes = nil;
   if (isXML) {
-    detailNodes = PerformXMLXPathQueryWithEncoding(data, xPathOrCSS, encoding);
+    detailNodes = ZNPerformXMLXPathQueryWithEncoding(data, xPathOrCSS, encoding);
   } else {
-    detailNodes = PerformHTMLXPathQueryWithEncoding(data, xPathOrCSS, encoding);
+    detailNodes = ZNPerformHTMLXPathQueryWithEncoding(data, xPathOrCSS, encoding);
   }
 
   NSMutableArray * hppleElements = [NSMutableArray array];
   for (id node in detailNodes) {
-    [hppleElements addObject:[TFHppleElement hppleElementWithNode:node isXML:isXML withEncoding:encoding]];
+    [hppleElements addObject:[ZNHppleElement hppleElementWithNode:node isXML:isXML withEncoding:encoding]];
   }
   return hppleElements;
 }
 
 // Returns first element at xPath
-- (TFHppleElement *) peekAtSearchWithXPathQuery:(NSString *)xPathOrCSS
+- (ZNHppleElement *) peekAtSearchWithXPathQuery:(NSString *)xPathOrCSS
 {
   NSArray * elements = [self searchWithXPathQuery:xPathOrCSS];
   if ([elements count] >= 1) {

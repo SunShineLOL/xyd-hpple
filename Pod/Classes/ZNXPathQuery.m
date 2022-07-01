@@ -1,12 +1,12 @@
 //
-//  XPathQuery.m
+//  ZNXPathQuery.m
 //  FuelFinder
 //
 //  Created by Matt Gallagher on 4/08/08.
 //  Copyright 2008 __MyCompanyName__. All rights reserved.
 //
 
-#import "XPathQuery.h"
+#import "ZNXPathQuery.h"
 
 #import <libxml/tree.h>
 #import <libxml/parser.h>
@@ -158,11 +158,11 @@ NSArray *PerformXPathQuery(xmlDocPtr doc, NSString *query)
     return resultNodes;
 }
 
-NSArray *PerformHTMLXPathQuery(NSData *document, NSString *query) {
-    return PerformHTMLXPathQueryWithEncoding(document, query, nil);
+NSArray *ZNPerformHTMLXPathQuery(NSData *document, NSString *query) {
+    return ZNPerformHTMLXPathQueryWithEncoding(document, query, nil);
 }
 
-NSArray *PerformHTMLXPathQueryWithEncoding(NSData *document, NSString *query,NSString *encoding)
+NSArray *ZNPerformHTMLXPathQueryWithEncoding(NSData *document, NSString *query,NSString *encoding)
 {
     xmlDocPtr doc;
     
@@ -181,11 +181,11 @@ NSArray *PerformHTMLXPathQueryWithEncoding(NSData *document, NSString *query,NSS
     return result;
 }
 
-NSArray *PerformXMLXPathQuery(NSData *document, NSString *query) {
-    return PerformXMLXPathQueryWithEncoding(document, query, nil);
+NSArray *ZNPerformXMLXPathQuery(NSData *document, NSString *query) {
+    return ZNPerformXMLXPathQueryWithEncoding(document, query, nil);
 }
 
-NSArray *PerformXMLXPathQueryWithEncoding(NSData *document, NSString *query,NSString *encoding)
+NSArray *ZNPerformXMLXPathQueryWithEncoding(NSData *document, NSString *query,NSString *encoding)
 {
     xmlDocPtr doc;
     

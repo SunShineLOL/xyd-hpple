@@ -44,9 +44,12 @@
 
 - (void)setUp
 {
-    NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
-    NSURL *testFileUrl = [testBundle URLForResource:TEST_DOCUMENT_NAME withExtension:TEST_DOCUMENT_EXTENSION];
+//    NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
+//    NSURL *testFileUrl = [testBundle URLForResource:TEST_DOCUMENT_NAME withExtension:TEST_DOCUMENT_EXTENSION];
+    NSURL *testFileUrl = [NSURL URLWithString:@"https://etax.guangdong.chinatax.gov.cn/sso/login?service=http://etax.guangdong.chinatax.gov.cn/xxmh/html/index_login.html?bszmFrom=1&t=1654493250541"];
     NSData * data = [NSData dataWithContentsOfURL:testFileUrl];
+    NSString *s = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(s);
     self.doc = [[TFHpple alloc] initWithHTMLData:data];
 }
 
@@ -59,8 +62,8 @@
 //  doc.search("//p[@class='posted']")
 - (void)testSearchesWithXPath
 {
-    NSArray *a = [self.doc searchWithXPathQuery:@"//a[@class='sponsor']"];
-    XCTAssertEqual([a count], 2);
+    NSArray *a = [self.doc searchWithXPathQuery:@"//*[@id='shxydmOrsbh']"];
+    XCTAssertEqual([a count], 1);
     
     TFHppleElement * e = [a objectAtIndex:0];
     XCTAssertTrue([e isMemberOfClass:[TFHppleElement class]]);
